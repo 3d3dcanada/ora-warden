@@ -46,8 +46,10 @@ seeds the rest. Free.
   lives under a `3d3dcanada` GitHub org/user, or change `server.json`'s `name` to the real owner).
 - **Mechanism:** the `mcp-publisher` CLI + the repo's `server.json` (already written). CLI-based, no
   web form.
-- **Prereq:** the package must be published to PyPI first (see §6), because `server.json` references
-  the `pypi` package `ora-warden`.
+- **Prereq: DONE 2026-08-12.** `server.json` no longer references PyPI. It now declares an `mcpb`
+  package pointing at the `ora-warden.mcpb` attached to the v0.1.0 GitHub release, with its real
+  `fileSha256` (`cce90f07...83a44`), and it validates clean against schema `2025-12-11`. There is no
+  remaining PyPI dependency anywhere in the manifest.
 - **Steps (paired):**
   1. `curl -fsSL https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz | tar xz` (or install per current docs).
   2. `./mcp-publisher login github` → completes GitHub device-auth in Randall's browser.
@@ -103,7 +105,13 @@ funnel to ora.3d3d.ca (we do NOT meter tool calls — the paid product is the fu
 ## Pre-submission checklist (do before the paired session)
 - [ ] Decide the GitHub owner (`3d3dcanada`?) and create the **public** `ora-warden` repo; push.
 - [ ] Confirm `server.json` `name` namespace matches that owner.
-- [ ] Publish `ora-warden` to **PyPI** (§2) and verify `uvx ora-warden` on a clean machine.
+- [x] ~~Publish to **PyPI**~~ dropped by owner decision. Instead: `server.json` declares the
+      `mcpb` release asset, validated against the 2025-12-11 schema (2026-08-12).
+- [x] **Verify the install actually works in a clean environment** (2026-08-12). This caught a
+      real break: `mcp>=1.2.0` was unbounded, `mcp` 2.0.0 removed `mcp.server.fastmcp`, and the
+      documented command died on import. Pinned to `<2`; a clean run now registers all 15 tools.
+      **The pin is committed to the working tree only. Until it is pushed, the public repo is
+      still broken for a stranger, so nothing may be submitted anywhere.**
 - [ ] Ship a real **broker binary** (release artifact) or clear build-from-source install, so a
       stranger can actually run the enforcement layer (see INSTALL / WO-18).
 - [ ] Produce the **demo clip** (agent's `rm -rf` frozen + logged).

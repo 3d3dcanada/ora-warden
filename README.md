@@ -50,7 +50,8 @@ Expected registered tool count: 15.
 
 ## Install
 
-Install the MCP bridge from PyPI:
+Install the MCP bridge straight from GitHub. There is no PyPI package and there will not be one
+(owner decision, 2026-07-09), so these commands need no account anywhere:
 
 ```bash
 uvx --from git+https://github.com/3d3dcanada/ora-warden ora-warden

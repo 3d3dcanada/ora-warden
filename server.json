@@ -11,11 +11,10 @@
   "websiteUrl": "https://ora.3d3d.ca",
   "packages": [
     {
-      "registryType": "pypi",
-      "registryBaseUrl": "https://pypi.org",
-      "identifier": "ora-warden",
+      "registryType": "mcpb",
+      "identifier": "https://github.com/3d3dcanada/ora-warden/releases/download/v0.1.0/ora-warden.mcpb",
       "version": "0.1.0",
-      "runtimeHint": "uvx",
+      "fileSha256": "cce90f071b1d527e9d9d6573715b77545f3c8550ad8b0c8999a409bf2b083a44",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "ORA_BROKER_URL", "description": "Loopback broker URL.", "default": "http://127.0.0.1:4573" },
